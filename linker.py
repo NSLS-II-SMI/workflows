@@ -93,17 +93,16 @@ def get_symlink_pairs(ref, *, det_map, root_map=None):
         if name == "start":
             start_uid = doc["uid"]
 
-            output_path = f"{doc['project_name']}/"
-            target_template = f'{output_path}/{{det_name}}/{doc["username"]}_\
-            {doc["sample_name"]}_id{doc["scan_id"]}_{{N:06d}}_{{det_type}}.tif'
+            target_template = (f"{{det_name}}/{doc['username']}_{doc['sample_name']}_"
+                               f"id{doc['scan_id']}_{{N:06d}}_{{det_type}}.tif")
 
             target_path = Path(
-                f"/nsls2/data/smi/proposals/{doc['cycle']}/{doc['data_session']}\
-                /user_data"
+                (f"/nsls2/data/smi/proposals/{doc['cycle']}/{doc['data_session']}/"
+                f"projects/{doc['project_name']}/user_data")
             )
             analysis_path = Path(
-                f"/nsls2/data/smi/proposals/{doc['cycle']}/{doc['data_session']}\
-                /analysis/{output_path}"
+                (f"/nsls2/data/smi/proposals/{doc['cycle']}/{doc['data_session']}/"
+                f"projects/{doc['project_name']}/analysis")
             )
 
         elif name == "resource":
