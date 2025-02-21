@@ -12,13 +12,6 @@ def log_completion():
 @flow
 def end_of_run_workflow(stop_doc):
     uid = stop_doc["run_start"]
-
-    # Launch validation and linker concurrently.
-    validation_task = data_validation.submit(uid)
-    linker_task = linker.submit(uid)
-
-    # Wait for completion.
-    validation_task.result()
-    linker_task.result()
-
+    data_validation(uid)
+    linker(uid)
     log_completion()
