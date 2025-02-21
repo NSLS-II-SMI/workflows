@@ -162,12 +162,14 @@ def get_symlink_pairs(ref, *, det_map, root_map=None):
                                 point_number * fpp + fr,
                             )
                         )
+                        if 'target_file_name' in doc['data']:
+                            sample_name = doc['data']['target_file_name'][0]
 
                         dest_path = target_path / target_template.format(
                             det_name=det_name,
                             N=point_number * fpp + fr,
                             det_type=det_type,
-                            sample=doc['data'].get('target_file_name', sample_name).replace("'","").replace("[","").replace("]",""),
+                            sample=sample_name,
                         )
                         links.append(
                             (start_uid, source_path, dest_path, analysis_path)
