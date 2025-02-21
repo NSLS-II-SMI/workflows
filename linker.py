@@ -138,9 +138,7 @@ def get_symlink_pairs(ref, *, det_map, root_map=None):
                 doc = event_model.pack_event_page(doc)
 
             if "target_file_name" in target_keys:
-                sample = doc['data']['target_file_name']
-            else:
-                sample = sample_name
+                sample_name = doc['data']['target_file_name']
             for key in target_keys:
 
                 det, _, _ = key.partition("_")
@@ -171,7 +169,7 @@ def get_symlink_pairs(ref, *, det_map, root_map=None):
                             det_name=det_name,
                             N=point_number * fpp + fr,
                             det_type=det_type,
-                            sample=sample,
+                            sample=sample_name,
                         )
                         links.append(
                             (start_uid, source_path, dest_path, analysis_path)
