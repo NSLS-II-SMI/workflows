@@ -23,4 +23,4 @@ def read_all_streams(uid, beamline_acronym):
 
 @flow
 def data_validation(uid):
-    read_all_streams(uid, beamline_acronym="smi")
+    read_all_streams.submit(uid, beamline_acronym="smi").result()

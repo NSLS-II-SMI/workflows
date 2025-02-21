@@ -192,6 +192,6 @@ def linker(ref):
 
     det_map = {"900KW": "WAXS", "1M": "SAXS"}
 
-    get_symlink_pairs(ref, det_map=det_map)
+    get_symlink_pairs.submit(ref, det_map=det_map).result()
 
     logger.info("Finish linker.")
