@@ -1,5 +1,5 @@
 # from prefect import task, get_run_logger
-from sys import os
+import os
 from pathlib import Path
 from tiled.client import from_profile
 import ttime
