@@ -185,15 +185,3 @@ def get_symlink_pairs(ref, *, det_map, root_map=None):
         logger.info(f"Links successfully generated {linked}")
         return
 
-
-@flow(log_prints=True)
-def linker(ref):
-
-    logger = get_run_logger()
-    logger.info("Start linker...")
-
-    det_map = {"900KW": "WAXS", "1M": "SAXS"}
-
-    get_symlink_pairs(ref, det_map=det_map)
-
-    logger.info("Finish linker.")

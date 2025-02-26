@@ -22,9 +22,12 @@ def end_of_run_workflow(stop_doc):
     validation_task = read_all_streams.submit(uid, beamline_acronym="smi")
     logger.info("Launched validation task")
 
+    export_task = export_amptek.submit(uid, beamline_acronym="smi")
+    logger.info("Launched validation task")
+
     # Wait for completion.
     logger.info("Waiting for tasks to complete")
     validation_task.result()
     linker_task.result()
-
+    export_task.result()
     log_completion()
