@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 from tiled.client import from_profile
-import ttime
+import time as ttime
 
 tiled_client = from_profile("nsls2")["smi"]
 tiled_client_raw = tiled_client["raw"]
