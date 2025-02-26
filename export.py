@@ -10,7 +10,7 @@ tiled_client_raw = tiled_client["raw"]
 
 
 # @task
-def export_amptek(uid)
+def export_amptek(uid):
     # logger = get_run_logger()
     run = tiled_client_raw[uid]
     if "amptek" in run.metadata["start"]["detectors"]:
