@@ -23,7 +23,9 @@ def export_amptek(uid):
 
 
         newDir = "/nsls2/data/smi/proposals/%s/%s/projects/%s/user_data/Amptek/"% (cycle, datasession, project)       
-        
+        newdirpath = Path(newDir)
+        newdirpath.mkdir(exist_ok=True, parents=True)
+
         common_column="amptek_energy_channels"
         columns=["amptek_mca_spectrum"]
         xr = run.primary.read()
