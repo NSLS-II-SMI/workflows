@@ -2,6 +2,7 @@ from prefect import task, flow, get_run_logger
 from prefect.task_runners import ConcurrentTaskRunner
 from data_validation import read_all_streams
 from linker import get_symlink_pairs
+from export import export_amptek
 
 
 @task
@@ -21,9 +22,8 @@ def end_of_run_workflow(stop_doc):
     logger.info("Launched linker task")
     validation_task = read_all_streams.submit(uid, beamline_acronym="smi")
     logger.info("Launched validation task")
-
-    export_task = export_amptek.submit(uid, beamline_acronym="smi")
-    logger.info("Launched validation task")
+    export_task = export_amptek.submit(uid)
+    logger.info("Launched amptek export task")
 
     # Wait for completion.
     logger.info("Waiting for tasks to complete")

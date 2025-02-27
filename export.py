@@ -1,5 +1,7 @@
 # from prefect import task, get_run_logger
 import os
+import numpy as np
+import pandas as pd
 from pathlib import Path
 from tiled.client import from_profile
 import time as ttime
@@ -9,11 +11,11 @@ tiled_client_raw = tiled_client["raw"]
 
 
 
-# @task
+@task
 def export_amptek(uid):
-    # logger = get_run_logger()
+    logger = get_run_logger()
     run = tiled_client_raw[uid]
-    if "amptek" in run.metadata["start"]["detectors"]:
+    if "amptek_mca_spectrum" in run.primary.data:
         # retreive information from the start document
         cycle = run.metadata["start"]["cycle"]
         project = run.metadata["start"]["project_name"]
@@ -34,7 +36,7 @@ def export_amptek(uid):
         num_events = xr.dims["time"]
 
         before_loop_time = ttime.time()
-        # logger.info(f"Start exporting of {num_events} spectra to {newDir}")
+        logger.info(f"Start exporting of {num_events} spectra to {newDir}")
         for i in range(num_events):
             file = os.path.join(
                 newDir,
@@ -49,12 +51,12 @@ def export_amptek(uid):
             df = pd.DataFrame(data=data, columns=all_columns)
 
             start_time = ttime.time()
-            # logger.info(f"Exporting data with shape {data.shape} to {file}...")
+            logger.info(f"Exporting data with shape {data.shape} to {file}...")
             df.to_csv(file, index=False)
-            # logger.info(f"Exporting to {file} took " f"{ttime.time() - start_time:.5f}s\n")
+            logger.info(f"Exporting to {file} took " f"{ttime.time() - start_time:.5f}s\n")
 
-        # logger.info(
-        #     f"Exporting of {num_events} spectra took "
-        #     f"{ttime.time() - before_loop_time:.5f}s"
-        # )
+        logger.info(
+            f"Exporting of {num_events} spectra took "
+            f"{ttime.time() - before_loop_time:.5f}s"
+        )
 
