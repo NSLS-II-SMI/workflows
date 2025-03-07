@@ -4,6 +4,7 @@ from tiled.client import from_profile
 
 import event_model
 import tqdm
+import shutil
 
 tiled_client = from_profile("nsls2")["smi"]
 tiled_client_raw = tiled_client["raw"]
@@ -40,7 +41,19 @@ def do_symlinking(
 
         try:
             dest.parent.mkdir(exist_ok=True, parents=True)
-            analysis.mkdir(exist_ok=True, parents=True)
+
+            if not analysis.exists():
+                # copy the default analysis notebooks to the analysis directory
+                default_analysis_path_s = Path('/nsls2/data/smi/shared/default_nb/saxs.ipynb')
+                default_analysis_path_w = Path('/nsls2/data/smi/shared/default_nb/waxs.ipynb')
+                
+                analysis.mkdir(exist_ok=True, parents=True)
+
+                shutil.copyfile(default_analysis_path_s, analysis)
+                shutil.copyfile(default_analysis_path_w, analysis)
+                
+
+
 
             if overwrite_dest and dest.exists():
                 dest.unlink()
