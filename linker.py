@@ -105,7 +105,9 @@ def get_symlink_pairs(ref, *, det_map, root_map=None):
     for name, doc in hrf.documents():
         if name == "start":
             start_uid = doc["uid"]
-            target_template = (f"{{det_name}}/{doc['username']}_{doc['sample_name']}_"
+            #target_template = (f"{{det_name}}/{doc['username']}_{doc['sample_name']}_"
+            #                   f"id{doc['scan_id']}_{{N:06d}}_{{det_type}}.tif")
+            target_template = (f"{{det_name}}/{doc['sample_name']}_"
                                f"id{doc['scan_id']}_{{N:06d}}_{{det_type}}.tif")
 
             target_path = Path(

@@ -34,12 +34,12 @@ def export_amptek(ref):
         cycle = run.metadata["start"]["cycle"]
         project = run.metadata["start"]["project_name"]
         datasession = run.metadata["start"]["data_session"]
-        username = run.metadata["start"]['username']
+        #username = run.metadata["start"]['username']
         sample_name = run.metadata["start"]['sample_name']
         scan_id = run.metadata["start"]['scan_id']
         newdirpath = Path("/nsls2/data/smi/proposals/%s/%s/projects/%s/user_data/Amptek2/"% (cycle, datasession, project))
         newdirpath.mkdir(exist_ok=True, parents=True)
-        target_template = (f"{username}_{sample_name}_id{scan_id}_FY.csv")
+        target_template = (f"{sample_name}_id{scan_id}_FY.csv")
         common_column="amptek_energy_channels"
         columns=["amptek_mca_spectrum"]
         xr = run.primary.read()
