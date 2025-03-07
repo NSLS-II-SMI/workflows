@@ -49,8 +49,8 @@ def do_symlinking(
                 
                 analysis.mkdir(exist_ok=True, parents=True)
 
-                shutil.copyfile(default_analysis_path_s, analysis)
-                shutil.copyfile(default_analysis_path_w, analysis)
+                shutil.copyfile(default_analysis_path_s, analysis / 'saxs.ipynb')
+                shutil.copyfile(default_analysis_path_w, analysis / 'waxs.ipynb')
                 
 
 
