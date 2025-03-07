@@ -40,7 +40,11 @@ def export_amptek(uid):
         before_loop_time = ttime.time()
         logger.info(f"Start exporting of {num_events} spectra to {newDir}")
         for i in range(num_events):
-            filename = run.metadata['start']['sample_name'].format(target_file_name = run['primary']['data'].get('target_file_name',"")[i])
+            if "target_file_name" in run['primary']['data']:
+                replacement_str = run['primary']['data']['target_file_name'][i]
+            else:
+                replacement_str = "notarget"
+            filename = run.metadata['start']['sample_name'].format(target_file_name = replacement_str)
             file = os.path.join(
                 newDir,
                 f"{filename}-{run.metadata['start']['uid'].split('-')[0]}-{i+1:05d}.csv",
