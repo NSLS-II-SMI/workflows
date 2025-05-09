@@ -17,7 +17,7 @@ def end_of_run_workflow(stop_doc):
     uid = stop_doc["run_start"]
 
     # Launch validation and linker concurrently.
-    det_map = {"900KW": "WAXS", "1M": "SAXS"}
+    det_map = {"900KW": "WAXS", "1M": "SAXS", "2M": "SAXS2M"}
     linker_task = get_symlink_pairs.submit(uid, det_map=det_map)
     logger.info("Launched linker task")
     validation_task = read_all_streams.submit(uid, beamline_acronym="smi")
